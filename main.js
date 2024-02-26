@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
 import Stats from 'three/examples/jsm/libs/stats.module'
 
 //Creates scene and background
@@ -14,6 +15,10 @@ scene.add(gridHelper);
 //Creates camera and camera starting position
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.z = 5;
+
+const light = new THREE.PointLight(0xffffff, 1000)
+light.position.set(2.5, 7.5, 15)
+scene.add(light)
 
 //Creates a WebGL1 Renderer
 const renderer = new THREE.WebGL1Renderer();
@@ -46,7 +51,7 @@ scene.add(rect_mesh);
 //creates a loader to load OBJ resources
 const objLoader = new OBJLoader()
 objLoader.load(
-    'models/cube.obj',
+    'models/testbg.obj',
     (object) => {
         // (object.children[0] as THREE.Mesh).material = material
         // object.traverse(function (child) {
