@@ -1,10 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
 import Stats from 'three/examples/jsm/libs/stats.module'
-import {func} from "three/addons/nodes/code/FunctionNode.js";
-
+import { loadModel } from './utils/modelLoader';
 //Creates scene and background
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x888888);
@@ -54,40 +51,7 @@ const rect_material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x111
 const rect_mesh = new THREE.Mesh(rect_geometry, rect_material);
 scene.add(rect_mesh); */
 
-
-// model
-
-const onProgress = function ( xhr ) {
-
-    if ( xhr.lengthComputable ) {
-
-        const percentComplete = xhr.loaded / xhr.total * 100;
-        console.log( percentComplete.toFixed( 2 ) + '% downloaded' );
-
-    }
-
-};
-
-new MTLLoader()
-    .setPath( 'models/' )
-    .load( 'carpet_quarter.mtl', function ( materials ) {
-
-        materials.preload();
-
-        new OBJLoader()
-            .setMaterials( materials )
-            .setPath( 'models/' )
-            .load( 'carpet_quarter.obj', function ( object ) {
-
-                //object.position.y = - 0.95;
-                //object.scale.setScalar( 0.01 );
-                scene.add( object );
-
-            }, onProgress );
-
-    } );
-
-//
+loadModel(scene);
 
 //This adds FPS stats in the top left of the dom
 const stats = new Stats()
