@@ -1,3 +1,0 @@
-{
-    "rewrites": [{ "source": "https://researchprojmattc.vercel.app/models", "destination": "/models" }]
-}
