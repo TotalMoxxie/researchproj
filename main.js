@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
 import Stats from 'three/examples/jsm/libs/stats.module'
+import {func} from "three/addons/nodes/code/FunctionNode.js";
 
 //Creates scene and background
 const scene = new THREE.Scene();
@@ -16,26 +17,31 @@ scene.add(gridHelper);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.z = 5;
 
+const ambientLight = new THREE.AmbientLight( 0xffffff );
+scene.add( ambientLight );
+/*
 const light = new THREE.PointLight(0xffffff, 1000)
 light.position.set(2.5, 7.5, 15)
-scene.add(light)
+scene.add(light)*/
+const pointLight = new THREE.PointLight( 0xffffff, 15 );
+camera.add( pointLight );
 
-//Creates a WebGL1 Renderer
-const renderer = new THREE.WebGL1Renderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setPixelRatio( window.devicePixelRatio );
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
 
 //Creates geometry,material and then meshes with cube and then adds cube to scene.
 const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0xff0000 }); // Use wireframe material
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
-
+/*
 //Setting up some constants for a custom shape
 const x = 0, y = 0;
 const width = 10;
 const height = 6;
-//Custome shape lines
+//Custom shape lines
 const rectangleShape = new THREE.Shape();
 rectangleShape.moveTo(x, y);
 rectangleShape.lineTo(x + width, y);
@@ -46,28 +52,42 @@ rectangleShape.lineTo(x, y);
 const rect_geometry = new THREE.ShapeGeometry(rectangleShape);
 const rect_material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x111111 });
 const rect_mesh = new THREE.Mesh(rect_geometry, rect_material);
-scene.add(rect_mesh);
+scene.add(rect_mesh); */
 
-//creates a loader to load OBJ resources
-const objLoader = new OBJLoader()
-objLoader.load(
-    'models/testbg.obj',
-    (object) => {
-        // (object.children[0] as THREE.Mesh).material = material
-        // object.traverse(function (child) {
-        //     if ((child as THREE.Mesh).isMesh) {
-        //         (child as THREE.Mesh).material = material
-        //     }
-        // })
-        scene.add(object)
-    },
-    (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-    },
-    (error) => {
-        console.log(error)
+
+// model
+
+const onProgress = function ( xhr ) {
+
+    if ( xhr.lengthComputable ) {
+
+        const percentComplete = xhr.loaded / xhr.total * 100;
+        console.log( percentComplete.toFixed( 2 ) + '% downloaded' );
+
     }
-)
+
+};
+
+new MTLLoader()
+    .setPath( 'models/' )
+    .load( 'carpet_quarter.mtl', function ( materials ) {
+
+        materials.preload();
+
+        new OBJLoader()
+            .setMaterials( materials )
+            .setPath( 'models/' )
+            .load( 'carpet_quarter.obj', function ( object ) {
+
+                //object.position.y = - 0.95;
+                //object.scale.setScalar( 0.01 );
+                scene.add( object );
+
+            }, onProgress );
+
+    } );
+
+//
 
 //This adds FPS stats in the top left of the dom
 const stats = new Stats()
