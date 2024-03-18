@@ -9,7 +9,8 @@ import { loadModel } from './utils/modelLoader';
 const { scene, camera, renderer, cube, controls } = sceneSetup();
 
 // Load model
-loadModel(scene);
+loadModel(scene, 'carpet_quarter', 'models/', 'models/');
+// Add more loadModel calls as needed
 
 // Set up input listeners
 setupInputListeners(cube, camera);
