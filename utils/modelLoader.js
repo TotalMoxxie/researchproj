@@ -3,7 +3,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 
 // Function to load a model
-export function loadModel(scene, modelName, modelPath, materialPath) {
+export function loadModel(scene, modelName, modelPath, materialPath, mixer) {
     const onProgress = function (xhr) {
         if (xhr.lengthComputable) {
             const percentComplete = xhr.loaded / xhr.total * 100;
@@ -19,6 +19,11 @@ export function loadModel(scene, modelName, modelPath, materialPath) {
                 .setMaterials(materials)
                 .setPath(modelPath)
                 .load(`${modelName}.obj`, function (object) {
+                    if (mixer) {
+                        mixer = new THREE.AnimationMixer(object);
+                        const action = mixer.clipAction(object.animations[0]);
+                        action.play();
+                    }
                     scene.add(object);
                 }, onProgress);
         });

@@ -1,15 +1,22 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { sceneSetup } from './scenes/scene';
 import { setupInputListeners } from './utils/input';
 import { loadModel } from './utils/modelLoader';
+import { fbxloadModel } from './utils/fbxModelLoader';
+
+const clock = new THREE.Clock();
+let mixer;
 
 // Set up scene
 const { scene, camera, renderer, cube, controls } = sceneSetup();
 
-// Load model
-loadModel(scene, 'carpet_quarter', 'models/', 'models/');
+// Load OBJ model
+loadModel(scene, 'carpet_quarter', 'models/', 'models/', null);
+
+// Load FBX model
+fbxloadModel(scene, 'Bboy Hip Hop Move','models/', 0.01);
+
 // Add more loadModel calls as needed
 
 // Set up input listeners
@@ -22,7 +29,12 @@ document.body.appendChild(stats.dom);
 // Animate scene
 function animate() {
     requestAnimationFrame(animate);
+    
+    const delta = clock.getDelta();
+
+    if (mixer) mixer.update(delta);
     controls.update();
     renderer.render(scene, camera);
+    stats.update();
 }
 animate();
