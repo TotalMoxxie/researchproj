@@ -21,6 +21,9 @@ export function sceneSetup() {
     const pointLight = new THREE.PointLight(0xffffff, 15);
     camera.add(pointLight);
 
+    const hemlight = new THREE.HemisphereLight(0xff0000, 10);
+    scene.add(hemlight);
+
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);

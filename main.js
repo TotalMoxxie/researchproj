@@ -12,7 +12,8 @@ let mixer;
 const { scene, camera, renderer, cube, controls } = sceneSetup();
 
 // Load OBJ model
-loadModel(scene, 'carpet_quarter', 'models/', 'models/', null);
+//loadModel(scene, 'carpet_quarter', 'models/', 'models/', null);
+loadModel(scene, 'cave design 1', 'models/', 'models/', null, 2);
 
 // Load FBX model
 fbxloadModel(scene, 'Bboy Hip Hop Move','models/', 0.01);
