@@ -4,6 +4,12 @@ import { sceneSetup } from './scenes/scene';
 import { setupInputListeners } from './utils/input';
 import { loadModel } from './utils/modelLoader';
 import { fbxloadModel } from './utils/fbxModelLoader';
+import { BasicCharacterController } from './utils/BasicCharacterController.js';
+import { BasicCharacterControllerInput } from './utils/BasicCharacterControllerInput.js';
+import { FiniteStateMachine } from './utils/FiniteStateMachine.js';
+import { CharacterFSM } from './utils/CharacterFSM.js';
+import { State } from './utils/State.js';
+
 
 const clock = new THREE.Clock();
 let mixer;
