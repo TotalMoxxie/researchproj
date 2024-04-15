@@ -10,7 +10,6 @@ import { FiniteStateMachine } from './utils/FiniteStateMachine.js';
 import { CharacterFSM } from './utils/CharacterFSM.js';
 import { State } from './utils/State.js';
 
-
 const clock = new THREE.Clock();
 let mixer;
 
