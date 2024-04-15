@@ -1,57 +1,60 @@
 <!-- src/index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
-  <link rel="icon" type="image/x-icon" href="/icons8-exercise-16.png">
-  <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="icon" type="image/x-icon" href="/icons8-exercise-16.png" />
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+  </head>
+  <body>
+<section class="hero is-medium">
+  <div class="hero-head">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-white" href="./">
+          <img src="/icons8-exercise-48.png" height="48" width="48" alt="" />
+          <!-- You can put your logo or site name here -->
+          TowerRun
+        </a>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="./">
-      <img src="/icons8-exercise-48.png" height="48" width="48" alt=""/>
-      <!-- You can put your logo or site name here -->
-      TowerRun
-      </a>
-
-    <!-- If you want to add a hamburger menu for mobile -->
-    <!-- <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <!-- If you want to add a hamburger menu for mobile -->
+        <!-- <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a> -->
-  </div>
+      </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <!-- Add your navbar links here -->
-      <a href="./" class="navbar-item">Home</a>
-      <a href="./about.html" class="navbar-item">About</a>
-      <a href="./game.html" class="navbar-item">Game</a>
-    </div>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <!-- Add your navbar links here -->
+          <a href="./" class="navbar-item has-text-white">Home</a>
+          <a href="./about.html" class="navbar-item has-text-white">About</a>
+          <a href="./game.html" class="navbar-item has-text-white">Game</a>
+        </div>
 
-    <!-- If you want to add navbar items to the right -->
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary" href="signup.html">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light" href="login.html">
-            Log in
-          </a>
+        <!-- If you want to add navbar items to the right -->
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" href="signup.html">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light" href="login.html"> Log in </a>
+            </div>
+          </div>
         </div>
       </div>
+    </nav>
+  </div>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">Tower Run</h1>
+      <p class="subtitle">developed by Matthew Calderon</p>
     </div>
   </div>
-</nav>
-
-<h1>Home Page</h1>
-<p>Welcome to the home page.</p>
-
-</body>
+</section>
+  </body>
 </html>
